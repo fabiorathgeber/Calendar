@@ -4,5 +4,8 @@
     "mysql2": "^3.15.0",
     "node.js": "^0.0.1-security"
   },
-  "type": "module"
+  "type": "module",
+  "script": {
+    "start": "node server2.js"
+  }
 }
