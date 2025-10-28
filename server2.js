@@ -9,7 +9,7 @@ import querystring from 'node:querystring'
 import {getUsers, addUser, saveEvent, getEvents, getEventsForOneUser, checkUser, searchUser, addRequest, getFriendRequests, acceptFriendRequest, getFriends, removeFriend, compareCalendars, removeEvent} from './db.js'
 
 const port = 10000;
-const host = 'localhost';
+const host = '0.0.0.0';
 
 const options = {
     key: fs.readFileSync('C:\\http certificates\\private-key.pem'),
