@@ -40,6 +40,7 @@ async function getUsers() {
 }
 async function addUser(username, password) {
     try {
+        console.log('omg im here')
         let sql = `INSERT INTO users (username, password) VALUES (?, ?)`
         await pool.query(sql, [username, password]);
 

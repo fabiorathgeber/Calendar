@@ -156,7 +156,7 @@ const server = http.createServer(async (req, res) => {
             res.end();
         }
         if(req.url=='/users') {
-
+            console.log('hey hey hey')
             let data;
             req.on('data', (d) => {
                 data = JSON.parse(d);

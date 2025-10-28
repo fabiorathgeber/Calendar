@@ -55,7 +55,7 @@ async function addUser(username, password) {
         username: username,
         password: password
     });
-
+    console.log('adding!')
 
     try {
         const response = await fetch('/users', {
