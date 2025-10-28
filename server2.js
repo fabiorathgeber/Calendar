@@ -8,7 +8,7 @@ import querystring from 'node:querystring'
 
 import {getUsers, addUser, saveEvent, getEvents, getEventsForOneUser, checkUser, searchUser, addRequest, getFriendRequests, acceptFriendRequest, getFriends, removeFriend, compareCalendars, removeEvent} from './db.js'
 
-const port = 3000;
+const port = 10000;
 const host = 'localhost';
 
 const options = {
