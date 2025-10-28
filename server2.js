@@ -107,7 +107,7 @@ const server = https.createServer(options, async (req, res) => {
 
     async function checkGet() {
         if(req.method=='GET') {
-            const fullUrl = new URL(req.url, 'https://localhost:3000/');
+            const fullUrl = new URL(req.url, 'https://0.0.0.0:10000/');
             if(fullUrl.pathname=='/events') {
                 // searchParams pathname href
                 const owner_id = fullUrl.searchParams.get('owner_id');
@@ -319,7 +319,7 @@ const server = https.createServer(options, async (req, res) => {
 
 //     async function checkGet() {
 //         if(req.method=='GET') {
-//             const fullUrl = new URL(req.url, 'https://localhost:3000/');
+//             const fullUrl = new URL(req.url, 'https://0.0.0.0:10000/');
 //             if(fullUrl.pathname=='/events') {
 //                 // searchParams pathname href
 //                 const owner_id = fullUrl.searchParams.get('owner_id');
@@ -389,7 +389,7 @@ server.listen(port, host, () => {
     console.log('server is running at https://'+host+':'+port+'/');
 });
 
-// https.get('https://localhost:3000/users', (res) => {
+// https.get('https://0.0.0.0:10000/users', (res) => {
 
 //     let data = '';
 

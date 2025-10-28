@@ -14,7 +14,7 @@ async function getEventByOwner(user_id) {
     let data;
     
     try {
-        const response = await fetch(`https://localhost:3000/events?${params}`, {
+        const response = await fetch(`https://0.0.0.0:10000/events?${params}`, {
             //should i make it a post request?
             method: 'GET',
             headers: {'Content-Type': 'application/json'},
@@ -42,7 +42,7 @@ async function saveEvent(owner_id, day, month, year, title, index, startTime, en
     startTime: startTime,
     endTime: endTime,
     });
-    const response = await fetch('https://localhost:3000/events', {
+    const response = await fetch('https://0.0.0.0:10000/events', {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -60,7 +60,7 @@ async function addUser(username, password) {
 
 
     try {
-        const response = await fetch('https://localhost:3000/users', {
+        const response = await fetch('https://0.0.0.0:10000/users', {
             method: "PUT",
             headers: {"Content-Type" : "application/json"},
             body: body,
@@ -92,7 +92,7 @@ async function checkUser(username, password) {
     let data;
 
     try {
-        const response = await fetch(`https://localhost:3000/checkuser`, {
+        const response = await fetch(`https://0.0.0.0:10000/checkuser`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: body,
@@ -109,7 +109,7 @@ async function checkUser(username, password) {
 }
 
 async function getID() {
-    const response = await fetch(`https://localhost:3000/getID`, {
+    const response = await fetch(`https://0.0.0.0:10000/getID`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         credentials: "include",
@@ -123,7 +123,7 @@ async function searchUsers(username) {
         username: username
     });
 
-    const response = await fetch(`https://localhost:3000/searchUsers`, {
+    const response = await fetch(`https://0.0.0.0:10000/searchUsers`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: body,
@@ -137,7 +137,7 @@ async function addRequest(id1, id2) {
         id1: id1,
         id2: id2,
     })
-    const response = await fetch(`https://localhost:3000/request`, {
+    const response = await fetch(`https://0.0.0.0:10000/request`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
         body: body,
@@ -146,7 +146,7 @@ async function addRequest(id1, id2) {
     return data;
 }
 async function getFriendRequests(user_id) {
-    const response = await fetch(`https://localhost:3000/incomingRequests`, {
+    const response = await fetch(`https://0.0.0.0:10000/incomingRequests`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -158,7 +158,7 @@ async function getFriendRequests(user_id) {
 
 }
 async function acceptFriendRequest(requester_id, reciever_id) {
-    const response = await fetch(`https://localhost:3000/reqAccepted`, {
+    const response = await fetch(`https://0.0.0.0:10000/reqAccepted`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -171,7 +171,7 @@ async function acceptFriendRequest(requester_id, reciever_id) {
 }
 
 async function getFriends(user_id) {
-    const response = await fetch(`https://localhost:3000/getFriends`, {
+    const response = await fetch(`https://0.0.0.0:10000/getFriends`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -183,7 +183,7 @@ async function getFriends(user_id) {
 }
 
 async function removeFriend(id1, id2) {
-    const response = await fetch(`https://localhost:3000/removeFriend`, {
+    const response = await fetch(`https://0.0.0.0:10000/removeFriend`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -196,7 +196,7 @@ async function removeFriend(id1, id2) {
 }
 
 async function compareCalendars(id1, id2, day, month, year) {
-    const response = await fetch(`https://localhost:3000/compareCalendars`, {
+    const response = await fetch(`https://0.0.0.0:10000/compareCalendars`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -211,7 +211,7 @@ async function compareCalendars(id1, id2, day, month, year) {
     return data;
 }
 async function removeEvent() {
-    const response = await fetch(`https://localhost:3000/event`, {
+    const response = await fetch(`https://0.0.0.0:10000/event`, {
         method: "DELETE",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
