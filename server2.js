@@ -1,6 +1,6 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-import https from 'node:https';
+import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -11,10 +11,10 @@ import {getUsers, addUser, saveEvent, getEvents, getEventsForOneUser, checkUser,
 const port = 10000;
 const host = '0.0.0.0';
 
-const options = {
-    key: fs.readFileSync('C:\\http certificates\\private-key.pem'),
-    cert: fs.readFileSync('C:\\http certificates\\certificate.pem'),
-};
+// const options = {
+//     key: fs.readFileSync('C:\\http certificates\\private-key.pem'),
+//     cert: fs.readFileSync('C:\\http certificates\\certificate.pem'),
+// };
 
 // const types = {
 
@@ -62,7 +62,7 @@ const mimeTypes = {
     '.svg': 'image/svg+xml'
 };
 
-const server = https.createServer(options, async (req, res) => {
+const server = http.createServer(async (req, res) => {
 
 
     const filePath = path.join(process.cwd(), req.url === '/' ? 'index.html' : req.url);
@@ -107,7 +107,7 @@ const server = https.createServer(options, async (req, res) => {
 
     async function checkGet() {
         if(req.method=='GET') {
-            const fullUrl = new URL(req.url, 'https://0.0.0.0:10000/');
+            const fullUrl = new URL(req.url, 'http://0.0.0.0:10000/');
             if(fullUrl.pathname=='/events') {
                 // searchParams pathname href
                 const owner_id = fullUrl.searchParams.get('owner_id');
@@ -319,7 +319,7 @@ const server = https.createServer(options, async (req, res) => {
 
 //     async function checkGet() {
 //         if(req.method=='GET') {
-//             const fullUrl = new URL(req.url, 'https://0.0.0.0:10000/');
+//             const fullUrl = new URL(req.url, 'http://0.0.0.0:10000/');
 //             if(fullUrl.pathname=='/events') {
 //                 // searchParams pathname href
 //                 const owner_id = fullUrl.searchParams.get('owner_id');
@@ -386,10 +386,10 @@ const server = https.createServer(options, async (req, res) => {
 // });
 
 server.listen(port, host, () => {
-    console.log('server is running at https://'+host+':'+port+'/');
+    console.log('server is running at http://'+host+':'+port+'/');
 });
 
-// https.get('https://0.0.0.0:10000/users', (res) => {
+// http.get('http://0.0.0.0:10000/users', (res) => {
 
 //     let data = '';
 
