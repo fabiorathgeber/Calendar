@@ -1,8 +1,8 @@
 import mysql from 'mysql2/promise';
 
 const pool = await mysql.createPool({
-    host: 'localhost',
-    user: 'root',
+    host: 'calendar-db.cvyim8s0qwmb.us-east-2.rds.amazonaws.com',
+    user: 'admin',
     password: 'Pizzamaster7!',
     database: 'calendar'
 });
