@@ -48,7 +48,7 @@ async function addUser(username, password) {
         await pool.query(sql, [username, password]);
 
         sql = `
-        SELECT id FROM Users
+        SELECT id FROM users
         ORDER BY id DESC
         LIMIT 1`
         const [results, fields] = await pool.query(sql)
