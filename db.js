@@ -1,10 +1,13 @@
 import mysql from 'mysql2/promise';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 const pool = await mysql.createPool({
-    host: 'calendar-db.cvyim8s0qwmb.us-east-2.rds.amazonaws.com',
-    user: 'admin',
-    password: 'Pizzamaster7!',
-    database: 'Calendar'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
 });
 
 
