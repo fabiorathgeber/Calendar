@@ -91,7 +91,7 @@ async function saveEvent(owner_id, day, month, year, title, index, startTime, en
 
 async function getEvents() {
     try {
-        const [results, fields] = await pool.query(`SELECT * FROM Events`);
+        const [results, fields] = await pool.query(`SELECT * FROM events`);
         return results;
     }
     catch(err) {
@@ -113,7 +113,7 @@ async function getUsersAndEvents() {
 async function getEventsForOneUser(id) {
     try {
         const [results, fields] = await pool.query(`
-            SELECT * FROM Events WHERE owner_id=${id}`);
+            SELECT * FROM events WHERE owner_id=${id}`);
         return results;
     }
     catch(err) {
@@ -123,7 +123,7 @@ async function getEventsForOneUser(id) {
 
 async function checkUser(username, password) {
     try {
-        const sql = `SELECT id FROM Users WHERE username='${username}' AND password='${password}'`
+        const sql = `SELECT id FROM users WHERE username='${username}' AND password='${password}'`
         const [results, fields] = await pool.query(sql, [username, password])
         return results;
     }
@@ -134,7 +134,7 @@ async function checkUser(username, password) {
 
 async function searchUser(username) {
     try {
-        const sql = `SELECT * FROM Users WHERE LOWER(username) LIKE LOWER('%${username}%')`
+        const sql = `SELECT * FROM users WHERE LOWER(username) LIKE LOWER('%${username}%')`
         const [results, fields] = await pool.query(sql, [username])
         return results;
     }
@@ -144,7 +144,7 @@ async function searchUser(username) {
 }
 async function addRequest(requester_id, reciever_id) {
     try {
-        const sql = `INSERT INTO friendRequests (requester_id, reciever_id) VALUES (?, ?)`;
+        const sql = `INSERT INTO friendrequests (requester_id, reciever_id) VALUES (?, ?)`;
         const [results, fields] = await pool.query(sql, [requester_id, reciever_id]);
 
         return true;
@@ -160,7 +160,7 @@ async function getFriendRequests(user_id) {
         // const [results, fields] = await pool.query(sql, [user_id]);
         // console.log(results);
 
-        const sql = `SELECT id, username FROM Users WHERE id IN (SELECT requester_id FROM friendRequests WHERE reciever_id=?)`;
+        const sql = `SELECT id, username FROM users WHERE id IN (SELECT requester_id FROM friendrequests WHERE reciever_id=?)`;
         const [results, fields] = await pool.query(sql, [user_id]);
         return results;
         //change everythign to question marks
@@ -171,10 +171,10 @@ async function getFriendRequests(user_id) {
 }
 async function acceptFriendRequest(requester_id, reciever_id) {
     try {
-        const sql1 = `DELETE FROM friendRequests WHERE requester_id=? AND reciever_id=?`
+        const sql1 = `DELETE FROM friendrequests WHERE requester_id=? AND reciever_id=?`
         const [results1, fields1] = await pool.query(sql1, [requester_id, reciever_id]);
 
-        const sql2 = `INSERT INTO Friends(id1, id2) VALUES(?, ?)`
+        const sql2 = `INSERT INTO friends(id1, id2) VALUES(?, ?)`
         const [results2, fields2] = await pool.query(sql2, [requester_id, reciever_id])
 
         return true;
@@ -192,7 +192,7 @@ async function makeFriendList() {
 async function getFriends(user_id) {
     try {
         let idList = [];
-        const sql = `SELECT * FROM Friends WHERE id1=? OR id2=?`
+        const sql = `SELECT * FROM friends WHERE id1=? OR id2=?`
         const [results, fields] = await pool.query(sql, [user_id, user_id])
 
         console.log(results)
@@ -209,7 +209,7 @@ async function getFriends(user_id) {
         const friendList = [];
 
         for (const id of idList) {
-            const sql2 = `SELECT id, username FROM Users WHERE id=?`
+            const sql2 = `SELECT id, username FROM users WHERE id=?`
             const [results2, fields2] = await pool.query(sql2, [id])
             friendList.push(results2);
         }
@@ -225,7 +225,7 @@ async function getFriends(user_id) {
 }
 async function removeFriend(id1, id2) {
     try {
-        const sql = `DELETE FROM Friends WHERE (id1=? AND id2=?) OR (id1=? AND id2=?)`;
+        const sql = `DELETE FROM friends WHERE (id1=? AND id2=?) OR (id1=? AND id2=?)`;
         const [results, fields] = await pool.query(sql, [id1, id2, id2, id1])
         return true;
     }
@@ -263,10 +263,10 @@ async function compareCalendars(id1, id2, day, month, year) {
 
         console.log('COMPARING')
 
-        const sql1 = `SELECT startTime, endTime FROM EVENTS WHERE owner_id=? AND day=?`
+        const sql1 = `SELECT startTime, endTime FROM events WHERE owner_id=? AND day=?`
         const [results1, fields1] = await pool.query(sql1, [id1, day]);
 
-        const sql2 = `SELECT startTime, endTime FROM EVENTS WHERE owner_id=? AND day=?`
+        const sql2 = `SELECT startTime, endTime FROM events WHERE owner_id=? AND day=?`
         const [results2, fields2] = await pool.query(sql2, [id2, day]);
 
         console.log('results 1')
@@ -328,7 +328,7 @@ async function compareCalendars(id1, id2, day, month, year) {
 
 async function removeEvent(id) {
     try {
-        const sql = `DELETE FROM Events WHERE id=?`;
+        const sql = `DELETE FROM events WHERE id=?`;
         const [results, fields] = await pool.query(sql, [id]);
         return true;
     }
