@@ -263,11 +263,11 @@ async function compareCalendars(id1, id2, day, month, year) {
 
         console.log('COMPARING')
 
-        const sql1 = `SELECT startTime, endTime FROM events WHERE owner_id=? AND day=?`
-        const [results1, fields1] = await pool.query(sql1, [id1, day]);
+        const sql1 = `SELECT startTime, endTime FROM events WHERE owner_id=? AND day=? AND month=? AND year=?`
+        const [results1, fields1] = await pool.query(sql1, [id1, day, month, year]);
 
-        const sql2 = `SELECT startTime, endTime FROM events WHERE owner_id=? AND day=?`
-        const [results2, fields2] = await pool.query(sql2, [id2, day]);
+        const sql2 = `SELECT startTime, endTime FROM events WHERE owner_id=? AND day=? AND month=? AND year=?`
+        const [results2, fields2] = await pool.query(sql2, [id2, day, month, year]);
 
         console.log('results 1')
         console.log(results1)
